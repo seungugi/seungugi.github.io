@@ -12,7 +12,7 @@ for(const name of pages){
  assert(html.includes('<html lang="ko">'),`Missing Korean language: ${name}`);
  for(const m of html.matchAll(/(?:src|href)="([^"]+)"/g)){
   const url=m[1];if(/^(https?:|mailto:|tel:)/.test(url))continue;
-  let [urlPath,anchor]=url.split('#');urlPath=urlPath.split('?')[0];if(urlPath.startsWith('/portfolio/'))urlPath=urlPath.slice('/portfolio'.length);let file=urlPath?path.resolve(urlPath.startsWith('/')?root:path.dirname(path.join(root,name)),'.'+(urlPath.startsWith('/')?urlPath:'/')+(urlPath.startsWith('/')?'':urlPath)):path.join(root,name);
+  let [urlPath,anchor]=url.split('#');urlPath=urlPath.split('?')[0];let file=urlPath?path.resolve(urlPath.startsWith('/')?root:path.dirname(path.join(root,name)),'.'+(urlPath.startsWith('/')?urlPath:'/')+(urlPath.startsWith('/')?'':urlPath)):path.join(root,name);
   if((await fs.stat(file).catch(()=>null))?.isDirectory())file=path.join(file,'index.html');
   await fs.access(file).catch(()=>{throw new Error(`Broken local link ${name}: ${url}`)});links++;
   if(anchor){const target=await fs.readFile(file,'utf8');assert(target.includes(`id="${anchor}"`),`Missing anchor ${name}: ${url}`);anchors++;}
