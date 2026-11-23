@@ -35,3 +35,6 @@ details.resume-section>summary:hover{color:#555}
 details.resume-section>summary:focus-visible{outline:2px solid #333;outline-offset:5px}
 .section-content{padding-top:10px}
 @media print{details.resume-section>summary::after{display:none}details.resume-section>summary .section-title{padding:0 0 10px;margin:20px 0}.section-content{padding-top:0}}
+
+.resume-pdf-link{color:#0969da;text-decoration:underline}
+.resume-pdf-link:hover,.resume-pdf-link:focus-visible{color:#0550ae}
